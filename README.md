@@ -13,8 +13,7 @@ This project is an AI-powered Python code reviewer built using Streamlit and Goo
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/mejdihaddad/GenAI-App-AI-Code-Reviewer.git
-   cd GenAI-App-AI-Code-Reviewer
+   git clone https://github.com/ankesh15/Code-reviewer-ai
    ```
 
 2. **Install dependencies**
@@ -49,4 +48,4 @@ This app only requires the following Python packages:
 - streamlit
 - google-generativeai
 
-All other dependencies have been removed to keep the environment lean and setup simple.
+
