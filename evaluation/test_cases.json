@@ -1,0 +1,114 @@
+[
+  {
+    "id": "tc-01",
+    "name": "SQL Injection via String Formatting",
+    "language": "Python",
+    "expected_category": "SECURITY",
+    "description": "User input directly interpolated into SQL query string.",
+    "code": "def get_user_records(db_cursor, username):\n    query = f\"SELECT * FROM users WHERE username = '{username}'\"\n    return db_cursor.execute(query).fetchall()"
+  },
+  {
+    "id": "tc-02",
+    "name": "Hardcoded API Secret",
+    "language": "Python",
+    "expected_category": "SECURITY",
+    "description": "Sensitive credentials hardcoded in source file.",
+    "code": "API_SECRET = \"sk_live_938f821b04da1293fe2840\"\n\ndef authenticate_client():\n    headers = {\"Authorization\": f\"Bearer {API_SECRET}\"}\n    return headers"
+  },
+  {
+    "id": "tc-03",
+    "name": "Unsafe Dynamic Code Execution",
+    "language": "Python",
+    "expected_category": "SECURITY",
+    "description": "Arbitrary code execution through eval() on user input.",
+    "code": "def calculate_expression(user_math_str):\n    # Arbitrary code execution vulnerability\n    result = eval(user_math_str)\n    return result"
+  },
+  {
+    "id": "tc-04",
+    "name": "Mutable Default Argument",
+    "language": "Python",
+    "expected_category": "BUG",
+    "description": "List default parameter persists mutations across function calls.",
+    "code": "def add_item(item, basket=[]):\n    basket.append(item)\n    return basket"
+  },
+  {
+    "id": "tc-05",
+    "name": "Off-By-One Index Out of Bounds",
+    "language": "Python",
+    "expected_category": "BUG",
+    "description": "Loop boundary accesses index len(items) leading to IndexError.",
+    "code": "def print_elements(items):\n    for i in range(len(items) + 1):\n        print(items[i])"
+  },
+  {
+    "id": "tc-06",
+    "name": "Zero Division on Empty Collection",
+    "language": "Python",
+    "expected_category": "BUG",
+    "description": "Computes average without guarding against zero division on empty input.",
+    "code": "def calculate_average(scores):\n    total = sum(scores)\n    return total / len(scores)"
+  },
+  {
+    "id": "tc-07",
+    "name": "Unhandled None Pointer",
+    "language": "Python",
+    "expected_category": "BUG",
+    "description": "Accesses profile attribute assuming dictionary lookup always succeeds.",
+    "code": "def get_user_email(user_dict):\n    profile = user_dict.get(\"profile\")\n    return profile[\"email\"]"
+  },
+  {
+    "id": "tc-08",
+    "name": "Quadratic Nested Loop Comparison",
+    "language": "Python",
+    "expected_category": "PERFORMANCE",
+    "description": "O(n^2) nested loop when a set lookup would achieve O(n).",
+    "code": "def find_duplicates(list_a, list_b):\n    matches = []\n    for x in list_a:\n        for y in list_b:\n            if x == y and x not in matches:\n                matches.append(x)\n    return matches"
+  },
+  {
+    "id": "tc-09",
+    "name": "Inefficient String Concatenation in Loop",
+    "language": "Python",
+    "expected_category": "PERFORMANCE",
+    "description": "Repeated += reallocation in loop instead of str.join().",
+    "code": "def build_csv_row(values):\n    output = \"\"\n    for val in values:\n        output += str(val) + \",\"\n    return output"
+  },
+  {
+    "id": "tc-10",
+    "name": "Linear Scan in Loop instead of Set",
+    "language": "Python",
+    "expected_category": "PERFORMANCE",
+    "description": "Performs O(n) membership check inside loop over large candidate list.",
+    "code": "def filter_banned_users(users, banned_ids_list):\n    active = []\n    for u in users:\n        if u[\"id\"] not in banned_ids_list:\n            active.append(u)\n    return active"
+  },
+  {
+    "id": "tc-11",
+    "name": "Bare Except Suppressing Critical Errors",
+    "language": "Python",
+    "expected_category": "QUALITY",
+    "description": "Bare except catches KeyboardInterrupt and masks bugs silently.",
+    "code": "def parse_configuration(file_path):\n    try:\n        with open(file_path) as f:\n            return json.load(f)\n    except:\n        return {}"
+  },
+  {
+    "id": "tc-12",
+    "name": "Cryptic Variables & Duplicated Math",
+    "language": "Python",
+    "expected_category": "QUALITY",
+    "description": "Non-descriptive variable names and copy-pasted calculation logic.",
+    "code": "def calc(a, b, c):\n    x = (a * 0.18) + (b * 0.18)\n    y = (b * 0.18) + (c * 0.18)\n    z = (a * 0.18) + (c * 0.18)\n    return x + y + z"
+  },
+  {
+    "id": "tc-13",
+    "name": "DOM XSS via innerHTML",
+    "language": "JavaScript",
+    "expected_category": "SECURITY",
+    "description": "Direct insertion of unescaped URL query parameter into innerHTML.",
+    "code": "function displayGreeting() {\n    const params = new URLSearchParams(window.location.search);\n    const name = params.get('name');\n    document.getElementById('greeting').innerHTML = '<h1>Welcome, ' + name + '</h1>';\n}"
+  },
+  {
+    "id": "tc-14",
+    "name": "Loose Equality and State Mutation",
+    "language": "JavaScript",
+    "expected_category": "BUG",
+    "description": "Loose equality with null/false type coercion and in-place array mutation.",
+    "code": "function removeActiveStatus(users) {\n    for (let i = 0; i < users.length; i++) {\n        if (users[i].active == 0) {\n            users.splice(i, 1);\n        }\n    }\n    return users;\n}"
+  }
+]
